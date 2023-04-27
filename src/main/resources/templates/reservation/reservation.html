@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="wrap" >
+		
+		
+
+			
+		<script type="text/javascript">
+			var UserAgent = navigator.userAgent; 
+			if (UserAgent.match(/iPhone|iPod|Android|Windows CE|BlackBerry|Symbian|Windows Phone|webOS|Opera Mini|Opera Mobi|POLARIS|IEMobile|lgtelecom|nokia|SonyEricsson/i) != null || UserAgent.match(/LG|SAMSUNG|Samsung/) != null)
+			{
+				location.href = "/mmm/html/reservation/WRS910_S101.asp";
+			}
+		</script>
+		
+		
+		
+		
+		
+		
+		<script type="text/javascript">
+		
+		var oldSelect   = "";
+		var oldSelect01 = "";
+		var oldSelect03 = "";
+		var oldSelect04 = "";
+		var sch01 = 0;
+		
+		
+		function setCheckin(CheckIn)
+		{ 
+			var frm = document.form1;
+			if (frm.txtsDate.value.replace(/-/gi, "") == '' )
+			{
+				frm.txtsDate.value = CheckIn;
+			}
+			else
+			{
+				frm.txteDate.value = CheckIn;
+			}
+		
+			var day = CheckIn;
+			var CheckIn01 = CheckIn;
+			CheckIn01 = CheckIn01;
+		
+			var clickDay = CheckIn01;
+		
+			day = day;
+		
+			var day01 = oldSelect01;
+			day01 = day01;
+		
+			var oldSelect02 = oldSelect;
+			oldSelect02 = oldSelect02;
+		
+			var clickDay01 = CheckIn01;
+			if(oldSelect != '')
+			{
+				if(oldSelect > clickDay)
+				{
+					frm.txtsDate.value  = CheckIn;
+					frm.txteDate.value = oldSelect02;
+		
+					clickDay   = CheckIn01;
+					clickDay01 = CheckIn01;
+					oldSelect03 = oldSelect01;
+					oldSelect04 = day01;
+		
+					if (sch01 == 1){
+						sch01 = 0
+					} else {
+					}
+		
+				} else {
+					frm.txtsDate.value = oldSelect02;
+					frm.txteDate.value = CheckIn;
+		
+					clickDay   = CheckIn01;
+					clickDay01 = CheckIn01;
+					oldSelect03 = oldSelect01;
+					oldSelect04 = day01;
+		
+					if (sch01 == 1){
+						sch01 = 0;
+					} else {
+					}
+				}
+			} else {
+				sch01 = 1;
+			}
+		
+			oldSelect   = clickDay;
+			oldSelect01 = clickDay01;
+		
+			putDate();
+		
+			if(frm.txtsDate.value.length > 3 && frm.txteDate.value.length > 3)
+			{
+				var oneDay = 24*60*60*1000;        
+				var firstDate = new Date(frm.txtsDate.value.substring(0,4),Number(frm.txtsDate.value.substring(5,7))-1 ,frm.txtsDate.value.substring(8,10));
+				var secondDate = new Date(frm.txteDate.value.substring(0,4),Number(frm.txteDate.value.substring(5,7))-1 ,frm.txteDate.value.substring(8,10));     
+				var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));  
+				if (document.getElementById("lbDays")) {
+					if(diffDays == 0)
+					{
+						diffDays = 1;
+					}
+				}       
+			}
+		}
+		
+		function putDate()
+		{
+		
+			fnTdClear();
+		
+			var frm = document.form1;
+			var num1 = frm.txtsDate.value;
+			var num2 = frm.txteDate.value;
+		
+			var CheckIn01 = num1.replace("-", "");
+				CheckIn01 = CheckIn01.replace("-", "");
+		
+			var CheckIn02 = num2.replace("-", "");
+				CheckIn02 = CheckIn02.replace("-", "");
+		
+			num1 = CheckIn01;
+			num2 = CheckIn02;
+		
+			var year1 = num1.substring(0, 4);
+				 year1 += "-";
+			var month1 = num1.substring(4, 6);
+				month1 += "-";
+			var days1 = num1.substring(6, 8);
+			var date1 = year1 + month1 + days1;
+		
+			var year2 = num2.substring(0, 4);
+				 year2 += "-";
+			var month2 = num2.substring(4, 6);
+				month2 += "-";
+			var days2 = num2.substring(6, 8);
+			var date2 = year2 + month2 + days2;
+		
+			var from_dt = new Date(num1.substring(0, 4), Number(num1.substring(4, 6))-1,num1.substring(6, 8)).valueOf();
+			var to_dt = new Date(num2.substring(0, 4), Number(num2.substring(4, 6))-1, num2.substring(6, 8)).valueOf();
+		
+			 if ((to_dt - from_dt)/(1000*60*60*24) >0)
+			{
+			frm.nights.value = (to_dt - from_dt)/(1000*60*60*24);
+			var loopCnt = (to_dt - from_dt)/(1000*60*60*24);
+		
+			}
+			frm.txtsDate.value = date1;
+			frm.txteDate.value = date2;
+		
+			// 스카이배너 상태 변경 처리. 
+			document.getElementById('skyCIdate').innerHTML = date1 ; 
+			document.getElementById('skyCOdate').innerHTML = date2 ; 
+		
+			if (to_dt - from_dt > 0 )
+			{
+				document.getElementById('skyNightsCnt').innerHTML = (to_dt - from_dt)/(1000*60*60*24);
+			}
+		
+			fnClick(date1, loopCnt);
+		
+		}
+		
+		String.prototype.replaceAllE = function (str1, str2) {
+			return this.split(str1).join(str2);
+		}
+		
+		function fnClick(date1, loopCnt){
+		
+			fnTdClear(date1, loopCnt);
+		
+			var r_date = new Date();
+			var startDate = date1;
+		
+			
+				document.getElementById(startDate).className="active";
+		
+				for (i = 0; i <= loopCnt; i++)
+				{
+					var loopDate = DateAdd(i, startDate.replaceAllE("-",""));
+					document.getElementById(loopDate).className="active";
+				}
+			
+		}
+		
+		function fnTdClear(date1, loopCnt){
+		
+			var startDate = "2023-04-01";
+			var endDate = "2023-05-31";
+		
+			startDate = startDate.replaceAllE("-", "")
+			endDate = endDate.replaceAllE("-", "")
+		
+			var from_dt = new Date(startDate.substring(0, 4), Number(startDate.substring(4, 6))-1,startDate.substring(6, 8)).valueOf();
+			var to_dt = new Date(endDate.substring(0, 4), Number(endDate.substring(4, 6))-1, endDate.substring(6, 8)).valueOf();
+			var loopCnt = (to_dt - from_dt)/(1000*60*60*24);
+		
+			
+		
+				for (i = 0; i <= loopCnt; i++)
+				{
+					var loopDate = DateAdd(i, startDate.replaceAllE("-",""));
+		
+					document.getElementById(loopDate).className="box";
+				}
+			
+		
+		}
+		
+			function DateAdd(v_day, ymd){
+				var ymd1 = ymd.replace(/\//gi,"").replace(/-/gi,"");
+		
+				var yyyy = ymd1.substr(0,4);
+				var mm = eval(ymd1.substr(4,2) + "- 1") ;
+				var dd = ymd1.substr(6,2);
+		 
+				var dt3 = new Date(yyyy, mm, eval(dd + '+' + v_day));
+		 
+				yyyy = dt3.getFullYear();
+				mm = (dt3.getMonth()+1)<10? "0" + (dt3.getMonth()+1) : (dt3.getMonth()+1) ;
+				dd = dt3.getDate()<10 ? "0" + dt3.getDate() : dt3.getDate();
+		
+				return  "" + yyyy + "-" + mm + "-" + dd ;
+			}
+			
+			function DateDiff(date1, date2) {
+				if (date1.length < 8) return -1;
+				if (date2.length < 8) return -1;
+				date1 = date1.substring(0, 4) + "/" + Number(date1.substring(4, 6))-1 + "/" + date1.substring(6);
+				date2 = date2.substring(0, 4) + "/" + Number(date2.substring(4, 6))-1 + "/" + date2.substring(6);
+				var sDate = new Date(date1);
+				var eDate = new Date(date2);
+				var timeSpan = (eDate - sDate) / 86400000;
+				var daysApart = Math.abs(Math.round(timeSpan));
+				return daysApart; 
+			}
+		
+		
+		function alertToday()
+		{
+			 alert("당일예약은 전화문의 주세요.\n\n");
+		}
+		
+		function cellOver(el){
+				el.style.backgroundColor="#c1c1c1";
+				el.style.Color="#ffffff";
+		}
+		
+		function cellOut(el){
+				el.style.backgroundColor="#ffffff";
+				el.style.Color="#000000";
+		}
+		
+		function diary_rtn(var1)
+		{
+			var frm = document.form1;
+		
+			var sDate = "2023-04-01"//document.form1.datepicker2.value;
+			var eDate = "2023-04-27"//document.form1.datepicker3.value;
+		
+			var num1 = frm.txtsDate.value;
+			var num2 = frm.txteDate.value;
+		
+			var CheckIn01 = num1.replace("-", "");
+				CheckIn01 = CheckIn01.replace("-", "");
+		
+			var CheckIn02 = num2.replace("-", "");
+				CheckIn02 = CheckIn02.replace("-", "");
+		
+			num1 = CheckIn01;
+			num2 = CheckIn02;
+		
+			var year1 = num1.substring(0, 4);
+				 year1 += "-";
+			var month1 = num1.substring(4, 6);
+				month1 += "-";
+			var days1 = num1.substring(6, 8);
+			var date1 = year1 + month1 + days1;
+		
+		
+			document.location.href = "WRS910_S101.asp?sDate="+var1+"&before_month_checkin_date=" + date1 + "&PROD_NO=&#cal";
+		}
+		
+		
+		</script>
+		
+		
+		<script type="text/javascript">
+		<!--
+		$(document).ready(function (){
+		   
+			// 세션 삭제후에 담은 변수를 사용.
+			// 예약 페이지로 바로 들어오면 달력 기본값 설정 없앰.
+			var index_checkin_date	= '';
+			var index_checkout_date = '';
+		
+			if (index_checkin_date){
+				setCheckin(index_checkin_date)
+				setCheckin(index_checkout_date)
+			}else{
+				
+			}
+		   
+		})
+		
+		</script>
+		
+		
+		
+		<form name="form1" method="post">
+		
+		
+			
+		
+			<!-- contents -->
+			<div class="contents contents3">
+				<!-- title -->
+				<div class="title title_2">
+							<h3>
+								Reservation.
+								<span>예약하기</span>
+							</h3>
+						</div>
+				<!-- //title -->
+		
+		
+				<div class="con w839">
+		
+					<div class="cfx">
+						<!-- step -->
+						<a href="https://www.naver.com/" target="_blank">
+							<img src="./image/reserve_step1_on.png" width="100px" alt="네이버 로고" title="네이버 로고">
+						</a><br>
+						<!-- //step -->
+		
+		
+					<!-- 날짜선택 달력+오른쪽확인창+아래입력창-->
+					<!-- 소타이틀 --><div class="stit">예약일자선택</div> <!-- //소타이틀 -->
+							<div class="resv_box">
+								<!-- 년월 -->
+								<div class="cal_year">
+									<div class="cal_prev">
+										<span class="year_prev"><a href="javascript:diary_rtn('2023-03-01');"><img src="./image/btn_prev.png" alt="이전" /></a></span>
+										<span class="cal_month">2023.04</span>
+									</div>
+									<div class="cal_next">								
+										<span class="cal_month">2023.05</span>
+										<span class="year_next"><a href="javascript:diary_rtn('2023-05-01');"><img src="./image/btn_next.png" alt="다음" /></a></span>
+									</div>				
+								</div>
+								<!-- //년월 -->
+		
+								<!-- 달력 -->
+								<div class="reserve_calendar_box">
+									<!-- 이전달력 -->
+									<div class="calendar_prev">
+											<table class="reserve_calendar">
+				<colgroup><col width="14%"/><col width="14%"/><col width="14%"/><col width="14%"/><col width="14%"/><col width="14%"/><col width="14%"/></colgroup>
+				<thead>
+				<tr><th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th></tr></thead><tbody>
+		<TR>
+		<TD>&nbsp;</TD>
+		<TD>&nbsp;</TD>
+		<TD>&nbsp;</TD>
+		<TD>&nbsp;</TD>
+		<TD>&nbsp;</TD>
+		<TD>&nbsp;</TD>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-01"><FONT color="e1e1e1">1</FONT></div></TD>
+						</tr></table></td>
+		</TR>
+		<TR><td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-02"><FONT color="e1e1e1">2</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-03"><FONT color="e1e1e1">3</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-04"><FONT color="e1e1e1">4</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-05"><FONT color="e1e1e1">5</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-06"><FONT color="e1e1e1">6</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-07"><FONT color="e1e1e1">7</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-08"><FONT color="e1e1e1">8</FONT></div></TD>
+						</tr></table></td>
+		</TR>
+		<TR><td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-09"><FONT color="e1e1e1">9</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-10"><FONT color="e1e1e1">10</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-11"><FONT color="e1e1e1">11</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-12"><FONT color="e1e1e1">12</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-13"><FONT color="e1e1e1">13</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-14"><FONT color="e1e1e1">14</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-15"><FONT color="e1e1e1">15</FONT></div></TD>
+						</tr></table></td>
+		</TR>
+		<TR><td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-16"><FONT color="e1e1e1">16</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-17"><FONT color="e1e1e1">17</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-18"><FONT color="e1e1e1">18</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-19"><FONT color="e1e1e1">19</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-20"><FONT color="e1e1e1">20</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-21"><FONT color="e1e1e1">21</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-22"><FONT color="e1e1e1">22</FONT></div></TD>
+						</tr></table></td>
+		</TR>
+		<TR><td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-23"><FONT color="e1e1e1">23</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-24"><FONT color="e1e1e1">24</FONT></div></TD>
+						</tr></table></td>
+		<td><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+		<TD><div class="box" id="2023-04-25"><FONT color="e1e1e1">25</FONT></div></TD>
+						</tr></table></td>
+		<td><A HREF="javascript:setCheckin('2023-04-26');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-04-26">
+				<FONT SIZE="-1">26</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-04-27');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-04-27">
+				<FONT SIZE="-1">27</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-04-28');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-04-28">
+				<FONT SIZE="-1">28</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-04-29');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-04-29">
+				<FONT SIZE="-1">29</FONT></div></TD>
+						</tr></table></a></td>
+		</TR>
+		<TR><td><A HREF="javascript:setCheckin('2023-04-30');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-04-30">
+				<FONT SIZE="-1">30</FONT></div></TD>
+						</tr></table></a></td>
+		<TD>&nbsp;</TD>
+		<TD>&nbsp;</TD>
+		<TD>&nbsp;</TD>
+		<TD>&nbsp;</TD>
+		<TD>&nbsp;</TD>
+		<TD>&nbsp;</TD>
+		</TR>
+				</tbody></table>
+		
+									</div>
+									<!-- //이전달력 -->
+		
+									<!-- 다음달력 -->
+									<div class="calendar_next">
+											<table class="reserve_calendar">
+				<colgroup><col width="14%"/><col width="14%"/><col width="14%"/><col width="14%"/><col width="14%"/><col width="14%"/><col width="14%"/></colgroup>
+				<thead>
+				<tr><th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th></tr></thead><tbody>
+		<TR>
+		<TD>&nbsp;</TD>
+		<td><A HREF="javascript:setCheckin('2023-05-01');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-01">
+				<FONT SIZE="-1">1</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-02');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-02">
+				<FONT SIZE="-1">2</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-03');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-03">
+				<FONT SIZE="-1">3</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-04');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-04">
+				<FONT SIZE="-1">4</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-05');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-05">
+				<FONT SIZE="-1">5</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-06');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-06">
+				<FONT SIZE="-1">6</FONT></div></TD>
+						</tr></table></a></td>
+		</TR>
+		<TR><td><A HREF="javascript:setCheckin('2023-05-07');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-07">
+				<FONT SIZE="-1">7</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-08');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-08">
+				<FONT SIZE="-1">8</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-09');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-09">
+				<FONT SIZE="-1">9</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-10');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-10">
+				<FONT SIZE="-1">10</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-11');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-11">
+				<FONT SIZE="-1">11</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-12');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-12">
+				<FONT SIZE="-1">12</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-13');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-13">
+				<FONT SIZE="-1">13</FONT></div></TD>
+						</tr></table></a></td>
+		</TR>
+		<TR><td><A HREF="javascript:setCheckin('2023-05-14');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-14">
+				<FONT SIZE="-1">14</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-15');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-15">
+				<FONT SIZE="-1">15</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-16');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-16">
+				<FONT SIZE="-1">16</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-17');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-17">
+				<FONT SIZE="-1">17</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-18');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-18">
+				<FONT SIZE="-1">18</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-19');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-19">
+				<FONT SIZE="-1">19</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-20');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-20">
+				<FONT SIZE="-1">20</FONT></div></TD>
+						</tr></table></a></td>
+		</TR>
+		<TR><td><A HREF="javascript:setCheckin('2023-05-21');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-21">
+				<FONT SIZE="-1">21</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-22');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-22">
+				<FONT SIZE="-1">22</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-23');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-23">
+				<FONT SIZE="-1">23</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-24');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-24">
+				<FONT SIZE="-1">24</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-25');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-25">
+				<FONT SIZE="-1">25</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-26');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-26">
+				<FONT SIZE="-1">26</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-27');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-27">
+				<FONT SIZE="-1">27</FONT></div></TD>
+						</tr></table></a></td>
+		</TR>
+		<TR><td><A HREF="javascript:setCheckin('2023-05-28');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-28">
+				<FONT SIZE="-1">28</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-29');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-29">
+				<FONT SIZE="-1">29</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-30');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-30">
+				<FONT SIZE="-1">30</FONT></div></TD>
+						</tr></table></a></td>
+		<td><A HREF="javascript:setCheckin('2023-05-31');"><table width="100%"  border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" id="calTb"><tr>
+			<TD onMouseOver="cellOver(this)" onMouseOut="cellOut(this)"><div class="box" id="2023-05-31">
+				<FONT SIZE="-1">31</FONT></div></TD>
+						</tr></table></a></td>
+		<TD>&nbsp;</TD>
+		<TD>&nbsp;</TD>
+		<TD>&nbsp;</TD>
+		</TR>
+				</tbody></table>
+		
+									</div>
+									<!-- //다음달력 -->
+								</div>
+								<!-- //달력 -->
+							
+						
+						
+								<!-- input -->
+								<div class="reserve_input">
+									<table class="t_left">
+										<colgroup>
+											<col width="19%"/><col width="37%"/>
+											<col width="19%"/><col width="45%"/>
+										</colgroup>
+										<tbody>
+										<tr>
+											<th>체크인</th>
+											<td><input type="text" class="i_type1" title="체크인" name="txtsDate" value="" /></td>
+											<th>체크아웃</th>
+											<td>
+												<input type="text" class="i_type1" title="체크아웃" name="txteDate" value="" />
+												<!--<a href="javascript:frm_reset('1');" class="hotel1_btn">재설정<!--<img src="/images/contents/btn_reset.gif" alt="재설정" /></a>-->
+											</td>
+										</tr>
+										<tr>
+											<th>숙박일수</th>
+											<td><input type="text" class="i_type1" title="숙박일수" name="nights" value="1" readonly/></td>
+											<th>투숙객수</th>
+											<td>
+												<select class="slt_type1" name="adult_cnt" title="투숙객수" onchange="skyChange('1', this.value)">
+													<!--<option value="">성인</option>-->
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+												</select>
+												<!-- 
+												<select class="slt_type1" name="child_cnt" title="투숙객수" onchange="skyChange('2', this.value)">
+													<option value="">어린이</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+												</select>
+												-->
+												
+											</td>
+										</tr>
+										<tr>
+											<th>객실수</th>
+											<td>
+												<select class="slt_type1" name="room_cnt" title="객실수" onchange="skyChange('4', this.value)">
+													
+													<option>1</option>
+													
+													<option>2</option>
+													
+													<option>3</option>
+													
+													<option>4</option>
+													
+												
+												</select>
+											</td>
+											<th><!--체크인시간--></th>
+											<td>
+												<!--
+												<select class="slt_type1" name="checkinTime" title="체크인시간" onchange="skyChange('5', this.value)">
+												
+												</select>
+												:
+												<select class="slt_type1" name="checkinTime1" title="체크인시간" onchange="skyChange('5', this.value)">
+													<option value="00">00</option>
+													<option value="30">30</option>
+												</select>
+												-->
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4" style="text-align:center; line-height:18px;">
+		<br />
+		* 정상적인 결제 진행을 위해 예약진행은 <!--앱이 또는 브라우저에서<br />&nbsp;&nbsp;&nbsp;--> 
+		<font color="blue">hotel1.me</font> 로 접속해주세요.
+		<br />
+		* 정상적인 결제 진행을 위해 팝업차단 설정(해제상태)를 확인해주세요.
+		<br /> 만약 해제 상태가 아니면 결제가 되지 않습니다. <br />
+		* 주차장 이용 시 차량 번호를 미리 등록하지 않으면 차단봉이 열리지 않습니다. <br />
+		*  6세미만 어린이는 최대2인까지 무료숙박이며 인원체크하지 말아주세요<br> 만약 체크를 하신다면 비용을 더 지불하게 됩니다. 
+		
+		
+											</td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
+								<!-- //input -->
+		
+								<!-- <p class="tip">* 9~10월까지는 인원추가 요금이 없습니다.</p> -->
+						
+							</div>
+							<!-- //예약달력 -->
+						
+						<!-- 예약정보 -->
+						<div class="reserve_info_box">
+							<div class="reserve_info">
+								<div class="title_box">
+									<p>예약정보</p>
+									<a href="javascript:frm_reset('1');" class="btn"><img src="/images/contents/btn_reset2.gif" alt="초기화" /></a>
+								</div>
+		
+								<div class="reserve_day">
+									<p class="tit">예약날짜</p>
+									<dl>
+										<dt>체크인</dt>
+										<dd><span id="skyCIdate">--</span></dd>
+		
+										<dt>체크아웃</dt>
+										<dd><span id="skyCOdate">--</span></dd>
+		
+										<dt>숙박일수</dt>
+										<dd><span id="skyNightsCnt">-</span>박</dd>
+		
+										<dt>객실수</dt>
+										<dd><span id="skyRoomCnt">1</span></dd>
+		
+										<dt>투숙객수</dt>
+										<dd>
+											<span id="skyAudltCnt">1</span>
+											<!--/ 
+											어린이:<span id="skyChildCnt">0</span>  
+											-->
+											
+										</dd>
+		
+										<!--<dt>체크인시간</dt>
+										<dd><span id="skyCItime">14 : 00</span></dd>-->
+									</dl>
+								</div></div>
+								<p class="btn_wrap"><a href="javascript:goNext();" class="btn_next">다음<!--<img src="/images/contents/btn_next2.gif" alt="다음" />--></a></p>						
+							
+						</div>
+						<!-- //예약정보 -->
+					
+						</div>
+						<!-- // resv_box -->
+						<!-- //날짜선택 달력+오른쪽확인창+아래입력창-->
+							
+							
+							
+							
+							
+		
+			</div></div></div></div>		<!-- footer -->
+				<div id="footer">
+					<!--<div class="f_box">
+						<div class="util">
+							<a href="#">회사소개</a>
+							<a href="#">고객의견접수</a>
+							<a href="#">개인정보취급방침</a>
+							<a href="#">이메일무단수집거부</a>
+							<a href="#">이용약관</a>
+						</div>
+						<div class="copyright">
+							​호텔 일 (HOTEL 1)<br/>
+							회사명 : (주)우리모두 브라보<br/>
+							대표이사 : 박천일<br/>
+							사업자등록번호 : 105-86-75358<br/>
+							주소 : 서울특별시 마포구 잔다리로 24 (서영빌딩4층)<br/>
+							T. 051-759-1011  /  F. 051-980-2401<br/><br/>
+							Copyright © Hotel 1 Co.,LTD. All Rights Reserved.
+						</div>
+					</div>-->
+				</div>
+				<!-- //footer -->
+		
+		
+		</div></form>	
+		
+		
+		<script>
+			function goNext() {
+		
+				var isChecked=false;
+				var	nowDate	= "2023-04-26";
+		
+				var txtsDate = document.form1.txtsDate.value;
+				var txteDate = document.form1.txteDate.value;
+				var objRoomCnt = document.form1.room_cnt;
+				var roomCnt = objRoomCnt.options[objRoomCnt.selectedIndex].value;
+				var nextFlag = true;		//	잔여객실 ajax 조회 후 처리 계속여부
+		
+		
+				if(nowDate > txtsDate)
+				{
+					alert("체크인 날짜를 선택해주십시오.");
+					document.form1.txtsDate.value	= "";
+					document.form1.txtsDate.focus();
+					return ;
+				}
+		
+				else if(txteDate <= txtsDate)
+				{
+					alert("날짜를 모두 입력해주십시오.");
+					document.form1.txteDate.value	= "";
+					return ;
+				}
+				if(document.form1.adult_cnt.value == "") //&& document.form1.child_cnt.value == ""
+				{
+					alert("투숙인원을 입력해주십시오.");
+					document.form1.adult_cnt.value	= "";
+					document.form1.adult_cnt.focus();
+					return ;
+				}
+		
+				//	잔여객실 여부 판단하기
+				$.ajax({
+						type: "POST",
+						url : "/html/reservation/WRS950_S201_OR.asp",
+						async : false,
+						data: {
+							HOTEL_NO : "ONE0001",
+							CHECKIN_DATE : txtsDate,
+							CHECKOUT_DATE: txteDate,
+							ROOM_CNT: roomCnt
+						},
+						success: function(data) {
+							if (parseInt(data) > 0) {
+								alert("선택하신 기간은 객실이 마감되었습니다.");
+								nextFlag = false;
+							}
+						},
+						error: function(xhr, status, error) {
+							alert("통신 중 오류가 발생했습니다. 관리자에게 문의 바랍니다.");
+						}
+				});
+		
+				if (!nextFlag){
+					return;
+				}
+		
+				setValue(); 
+		
+				
+					document.rsvnForm.action = "WRS920_S101.asp"
+				
+				document.rsvnForm.submit();
+		
+			}
+			function prodChange(val) {
+		
+				location.href="WRS910_S101.asp?PROD_NO=" + val + "&sDate=2023-04-01&eDate=2023-04-27&before_month_checkin_date=";
+		
+			}
+		
+			function setValue() {
+				var rsvnForm = document.rsvnForm; 
+				var frm = document.form1; 
+		
+				rsvnForm.CHECKIN_DATE.value = frm.txtsDate.value; 
+				rsvnForm.CHECKOUT_DATE.value = frm.txteDate.value; 
+				rsvnForm.ADULT_CNT.value = frm.adult_cnt.value; 
+				//rsvnForm.CHILD_CNT.value = frm.child_cnt.value; 
+			
+				rsvnForm.ROOM_CNT.value = frm.room_cnt.value; 
+				//rsvnForm.CHECKIN_TIME.value = frm.checkinTime.value; 
+				//rsvnForm.CHECKIN_TIME1.value = frm.checkinTime1.value; 
+			
+			
+			}
+		
+			function skyChange (val1, val2) {
+				switch (val1){
+					case "1" : document.getElementById('skyAudltCnt').innerHTML = val2 ;   // 성인 수
+							   break;
+					case "2" : document.getElementById('skyChildCnt').innerHTML = val2 ;   // 어린이 수
+							   break;
+					case "3" : document.getElementById('skyBabyCnt').innerHTML = val2 ;   // 유아 수
+							   break;
+					case "4" : document.getElementById('skyRoomCnt').innerHTML = val2 ;   // 객실수
+							   break;
+					case "5" : document.getElementById('skyCItime').innerHTML = document.form1.checkinTime.value + " : " + document.form1.checkinTime1.value ;   // 체크인 시간
+							   break;
+				}
+			}
+		
+			function frm_reset(_step) {
+		
+				var frm = document.form1 ; 
+		
+				frm.txtsDate.value = "";
+				frm.txteDate.value = "";
+				frm.nights.value = "";
+				frm.adult_cnt.value = "";
+				//frm.child_cnt.value = "";
+				frm.baby_cnt.value = "";
+		
+				fnTdClear("2023-04-01", "60");
+		
+				oldSelect   = "";
+				oldSelect01 = "";
+				oldSelect03 = "";
+				oldSelect04 = "";
+				sch01 = 0;
+		
+				document.getElementById('skyCIdate').innerHTML = "--" ; 
+				document.getElementById('skyCOdate').innerHTML = "--" ; 
+				document.getElementById('skyNightsCnt').innerHTML = "-";
+				document.getElementById('skyRoomCnt').innerHTML = "1" ;   
+				document.getElementById('skyAudltCnt').innerHTML = "0" ;   
+				document.getElementById('skyChildCnt').innerHTML = "0" ;   
+				document.getElementById('skyBabyCnt').innerHTML = "0" ;   
+				document.getElementById('skyCItime').innerHTML = "14 : 00" ;   
+		
+			}
+		
+		</script>
+		
+		<form method="post" name="rsvnForm">
+			<input type="hidden" name="MEMBER_ID" value="">
+			<input type="hidden" name="OFFICE_NO" value="ONE">
+			<input type="hidden" name="HOTEL_NO" value="ONE0001">
+			<input type="hidden" name="PROD_NO" value="">
+			<input type="hidden" name="CHECKIN_DATE" value="">
+			<input type="hidden" name="CHECKOUT_DATE" value="">
+			<input type="hidden" name="ADULT_CNT" value="">
+			<input type="hidden" name="CHILD_CNT" value="0">
+			<input type="hidden" name="BABY_CNT" value="">
+			<input type="hidden" name="ROOM_CNT" value="">
+			<input type="hidden" name="CHECKIN_TIME" value="">
+			<input type="hidden" name="CHECKIN_TIME1" value="">
+			<input type="hidden" name="BREAKFAST_CNT" value="">
+		
+		</form>
+		<br><br><br><br>
+</body>
+</html>
