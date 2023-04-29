@@ -5,6 +5,30 @@
     
     <title>예약</title>
     <style>
+  @font-face {
+  font-family: 'LotteMartDream';
+  font-style: normal;
+  font-weight: 400;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'LotteMartDream';
+  font-style: normal;
+  font-weight: 700;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'LotteMartDream';
+  font-style: normal;
+  font-weight: 300;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff') format('woff');
+}
+
+html {
+  font-family: 'LotteMartDream', sans-serif;
+}
         body {
   width: 500px;
   margin: 0 auto;
@@ -92,6 +116,15 @@ checkinElem.onchange = function () {
     </script>
 </head>
 <body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<header class="logo-bar con-min-width padding-0-10">
+  <div class="con flex flex-jc-c">
+    <a href="test" class="logo">
+      <span><i class="far fa-star"></i></span>
+      <span>ホテル ゆるり</span>
+    </a>
+  </div>
+</header>
     <form action="reservation" method="post">
         <div class="elem-group">
           <label for="name">Your Name</label>
@@ -124,6 +157,7 @@ checkinElem.onchange = function () {
         </div>
         <p>
         <button type="submit">客室選択</button>
+        
       </form>
 </body>
 </html>
