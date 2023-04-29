@@ -11,7 +11,7 @@ public class PageTest {
 	
 	@GetMapping("test")
 	public String getPage() {
-		log.info("test 페이지 시작");
+		log.info("test 페이지 시작!!");
 		return "test";
 	}
 }
