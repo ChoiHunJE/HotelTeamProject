@@ -3,48 +3,98 @@
 <head>
     <meta charset="UTF-8">
     
-    <title>예약</title>
+    <title>Reservation</title>
     <style>
+/* 노말라이즈 시작 */
+body, ul, li {
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+/* 노말라이즈 끝 */
+
+/* 라이브러리 시작 */
+.con {
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.block {
+  display:block;
+}
+
+.bg-red {
+  background-color:red;
+}
+
+.bg-blue {
+  background-color:blue;
+}
+
+.padding-0-10 {
+  padding:0 10px;
+}
+
+.flex {
+  display:flex;
+}
+
+.flex-wrap {
+  flex-wrap:wrap;
+}
+
+.flex-jc-c {
+  justify-content:center;
+}
+
+.width-25p {
+  width:25%;
+}
+
+.width-1-7 {
+  width:calc(100% / 7);
+}
+/* 라이브러리 끝 */    
+
   @font-face {
   font-family: 'LotteMartDream';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 200;
   src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff') format('woff');
 }
 
-@font-face {
-  font-family: 'LotteMartDream';
-  font-style: normal;
-  font-weight: 700;
-  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'LotteMartDream';
-  font-style: normal;
-  font-weight: 300;
-  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff') format('woff');
-}
 
 html {
   font-family: 'LotteMartDream', sans-serif;
 }
-        body {
+
+/* 로고바 시작 */
+.logo-bar .logo {
+  padding:30px 0;
+}
+
+.logo {
+  font-size:2rem;
+  font-weight:bold;
+}
+/* 로고바 끝 */
+
+body {
   width: 500px;
   margin: 0 auto;
   padding: 50px;
 }
 
+
 div.elem-group {
   margin: 20px 0;
 }
 
-div.elem-group.inlined {
-  width: 49%;
-  display: inline-block;
-  float: left;
-  margin-left: 1%;
-}
 
 label {
   display: block;
@@ -128,7 +178,7 @@ checkinElem.onchange = function () {
     <form action="reservation" method="post">
         <div class="elem-group">
           <label for="name">Your Name</label>
-          <input type="text" id="name" name="visitor_name" placeholder="John Doe" pattern=[A-Z\sa-z]{3,20} required>
+          <input type="text" id="name" name="visitor_name" placeholder="Name" pattern=[A-Z\sa-z]{3,20} required>
         </div>
         <div class="elem-group">
           <label for="email">Your E-mail</label>
@@ -136,15 +186,16 @@ checkinElem.onchange = function () {
         </div>
         <div class="elem-group">
           <label for="phone">Your Phone</label>
-          <input type="tel" id="phone" name="visitor_phone" placeholder="498-348-3872" pattern=(\d{3})-?\s?(\d{3})-?\s?(\d{4}) required>
+          <input type="tel" id="phone" name="visitor_phone" placeholder="010-1111-1111" pattern=(\d{3})-?\s?(\d{3})-?\s?(\d{4}) required>
+        </div>
+        <div class="elem-group inlined">
+          <label for="checkin-date">Birth</label>
+          <input type="date" id="checkin-date" name="checkin" required>
         </div>
         <hr>
+        
         <div class="elem-group inlined">
-          <label for="adult">Adults</label>
-          <input type="number" id="adult" name="total_adults" placeholder="2" min="1" required>
-        </div>
-        <div class="elem-group inlined">
-          <label for="child">Children</label>
+          <label for="child">customer</label>
           <input type="number" id="child" name="total_children" placeholder="2" min="0" required>
         </div>
         <div class="elem-group inlined">
