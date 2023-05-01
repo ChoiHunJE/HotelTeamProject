@@ -4,6 +4,27 @@
     <meta charset="UTF-8">
     
     <title>ホテルゆるり</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script th:inline="javascript">
+    window.initMap = function () {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 35.1059792, lng: 129.0377582 },
+          zoom: 18,
+        });
+        const malls = [
+            { label: "A", name: "부산무역호텔", lat: 35.1059154, lng: 129.037739 }
+          ];
+          const bounds = new google.maps.LatLngBounds();
+          malls.forEach(({ label, name, lat, lng }) => {
+            const marker = new google.maps.Marker({
+              position: { lat, lng },
+              label,
+              map,
+            });
+            bounds.extend(marker.position);
+          });
+     };
+    </script>
     <style>
         /* 폰트 시작 */
 @font-face {
@@ -480,6 +501,29 @@ ProdList__init();
     </div>
   </div>
 </section>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>google map</title>
+    <script defer src="./index.js"></script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY1tw2x4p1K5xLo35d61RHLSzg8YZP0RE&callback=initMap"></script>
+    <style>
+         #map {
+             width: 300px;
+             height: 300px; 
+        } 
+    </style>
+</head>
+<body>
+     <div class="box"></div>                 <!--영역테그 -->
+    </style>
+</head>
+<body>
+    <h1>Google Map</h1>
+    <div id="map"></div>
+</body>
+</html>
 <footer class="footer">
   <div id="serviceNameArea">
       <a href="/">
