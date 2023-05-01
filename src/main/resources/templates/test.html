@@ -26,6 +26,18 @@
      };
     </script>
     <style>
+    
+.container{
+            width: 1200px;
+            border: 1px solid white;
+            margin: auto;   /*중앙정렬*/
+           	background-color:skyblue;
+        }
+header{
+            background-color: white;
+            overflow: hidden;
+        }
+
         /* 폰트 시작 */
 @font-face {
   font-family: 'LotteMartDream';
@@ -501,6 +513,9 @@ ProdList__init();
     </div>
   </div>
 </section>
+
+<div class="container">
+<header>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -518,12 +533,17 @@ ProdList__init();
 <body>
      <div class="box"></div>                 <!--영역테그 -->
     </style>
+    <h1>업체위치</h1>
+    </header>
 </head>
 <body>
-    <h1>Google Map</h1>
+    
     <div id="map"></div>
 </body>
 </html>
+
+</div>
+
 <footer class="footer">
   <div id="serviceNameArea">
       <a href="/">
