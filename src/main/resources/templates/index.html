@@ -26,7 +26,13 @@
      };
     </script>
     <style>
-    
+    .my_bg {
+        background-image: url("/images/sky.png");
+     }
+     .my_div {
+    width: 150px;
+    height: 180px;
+    }
 .container{
             width: 1200px;
             border: 1px solid white;
@@ -433,6 +439,12 @@ ProdList__init();
 <div class="languages">
 <button class="translate" id="eng">EN</button>
 <button class="translate" id="jpn">JP</button>
+<div class="my_bg my_div">
+        <h2 class="country"></h2>
+        <h3 class="time">현재시간: </h3>
+        <h3 class="icon"></h3>
+        <h3 class="ctemp"></h3>
+    </div>
 </div>
 
 <header class="logo-bar con-min-width padding-0-10">
@@ -510,7 +522,28 @@ ProdList__init();
              height: 300px; 
         } 
     </style>
-    
+     <script>
+        $.getJSON('https://api.openweathermap.org/data/2.5/weather?lat=35.1028&lon=129.0403&appid=fcac82f14e9c8096543d05542904f924&units=metric',
+         function(data){
+            var temp = Math.round(data.main.temp);
+            $('.ctemp').append(temp + '°C');
+            var wiconUrl = ' <img src="https://openweathermap.org/img/wn/'+ data.weather[0].icon +'.png" alt="'+ data.weather[0].description + '">';
+            $('.icon').html(wiconUrl);
+            var ct = data.dt;
+            function convertTime(t) {
+                var ot = new Date(t*1000);  // Wed Apr 26 2023 11:14:57 GMT+0900 (한국 표준시)
+                var hour = ot.getHours();
+                var min = ot.getMinutes();
+                var sec = ot.getSeconds();
+
+                return hour + ':' + min + ':' + sec;
+            }
+            
+            var currentTime = convertTime(ct);
+            $('.time').append(currentTime);
+            $('.country').append(data.name + ', ' + data.sys.country);
+        });
+    </script>
 </head>
 <body>
      <div class="box"></div>                 <!--영역테그 -->
