@@ -9,9 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PageTest {
 	
-	@GetMapping("test")
+	@GetMapping("/")
 	public String getPage() {
 		log.info("test 페이지 시작!!");
-		return "test";
+		return "index";
 	}
 }
