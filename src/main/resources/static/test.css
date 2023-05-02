@@ -1,9 +1,10 @@
 @charset "UTF-8";
 
-
+/* 날씨 배경화면  */
 .my_bg {
         background-image: url("/images/sky.png");
      }
+/* 날씨 가로 세로  */     
 .my_div {
     width: 150px;
     height: 180px;

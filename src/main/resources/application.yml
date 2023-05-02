@@ -7,18 +7,5 @@ spring:
     url: jdbc:oracle:thin:@localhost:1521:xe
     username: Hotel
     password: 1234
-    driver-class-name: oracle.jdbc.driver.OracleDriver  
-
-mail:
-  smtp:
-    host: smtp.gmail.com
-    port: 587
-    username: ${cgw2908@gmail.com} 
-    password: ${wnuhqnmckuknsuda} 
-    auth: true
-    starttls:
-      enable: true
-  subject:
-    member:
-      registration: Thank you for reservation!  
+    driver-class-name: oracle.jdbc.driver.OracleDriver 
 
