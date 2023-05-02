@@ -13,7 +13,7 @@ public class ReservationController {
 	//예약하기 페이지 이동
 	@GetMapping("reservation")
 	public String Reservation() {
-		log.info("reservation 실행");
+		log.info("reservation 실행!!");
 		return "reservation/reservation";
 	}
 }
