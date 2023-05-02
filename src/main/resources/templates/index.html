@@ -339,6 +339,36 @@ footer {
 
 }
 
+.translate {
+  
+  background-color:transparent;
+  border-color: black;
+  
+  padding: 7px 7px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 50%;
+  
+  transition-duration: 0.4s;
+  margin-left: 10px;
+  
+}
+
+.translate:hover {
+  background-color: black;
+  color: white;
+}
+
+.languages {
+  position: relative;
+  float: right;
+  padding-right: 50px;
+  padding-top: 10px;
+
+}
+
+
 /* 커스텀 끝 */
     </style>
     
@@ -400,6 +430,11 @@ ProdList__init();
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
 
+<div class="languages">
+<button class="translate" id="eng">EN</button>
+<button class="translate" id="jpn">JP</button>
+</div>
+
 <header class="logo-bar con-min-width padding-0-10">
   <div class="con flex flex-jc-c">
     <a href="test" class="logo">
@@ -457,63 +492,8 @@ ProdList__init();
   </div>
 </section>
 
-<section class="title-bar con-min-width padding-0-10">
-  <h1 class="con">
-    <i class="fas fa-fire"></i>
-    POPULAR
-  </h1>
-</section>
 
-<section class="section-prod-list con-min-width padding-0-10">
-  <div class="con">
-    <div class="prod-list">
-      <ul class="flex flex-wrap">
-        <li class="width-25p">
-          <div>
-            <div class="prod-list__prod-img img-box">
-              <img src="https://plus.unsplash.com/premium_photo-1676321688630-9558e7d2be10?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
-              <div class="prod-list__prod-img-txt-1">ROOM 1</div>
-            </div>
-            <div class="prod-list__prod-name">ROOM 1</div>
-            <div class="prod-list__prod-price">98,000</div>
-          </div>
-        </li>
-        <li class="width-25p">
-          <div>
-            <div class="prod-list__prod-img img-box">
-              <img src="https://plus.unsplash.com/premium_photo-1678297269980-16f4be3a15a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
-              <div class="prod-list__prod-img-txt-1">ROOM 2</div>
-            </div>
-            <div class="prod-list__prod-name">ROOM 2</div>
-            <div class="prod-list__prod-price">98,000</div>
-          </div>
-        </li>
-        <li class="width-25p">
-          <div>
-            <div class="prod-list__prod-img img-box">
-              <img src="https://images.unsplash.com/photo-1631049035326-57414e7739eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
-              <div class="prod-list__prod-img-txt-1">ROOM 3</div>
-            </div>
-            <div class="prod-list__prod-name">ROOM 3</div>
-            <div class="prod-list__prod-price">98,000</div>
-          </div>
-        </li>
-        <li class="width-25p">
-          <div>
-            <div class="prod-list__prod-img img-box">
-              <img src="https://images.unsplash.com/photo-1621891333819-00c206ec8994?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
-              <div class="prod-list__prod-img-txt-1">ROOM 4</div>
-            </div>
-            <div class="prod-list__prod-name">ROOM 4</div>
-            <div class="prod-list__prod-price">98,000</div>
-          </div>
-        </li>
-        
-        
-      </ul>
-    </div>
-  </div>
-</section>
+
 
 <div class="container">
 <header>
