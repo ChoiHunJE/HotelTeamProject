@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.model.Mail;
 import com.example.service.EmailService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class MainController {
 	private final EmailService emailService;
@@ -24,7 +27,7 @@ public class MainController {
     @PostMapping("/mail/send")
     public String sendMail(Mail mail) {
         emailService.sendSimpleMessage(mail);
-        System.out.println("메일 전송 완료!");
+        log.info("이메일 전송 완료");
         
         return "redirect:/";
     }
