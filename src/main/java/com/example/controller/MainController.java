@@ -17,13 +17,15 @@ public class MainController {
  
     @GetMapping("/mail/send")
     public String main() {
-        return "SendMail.html";
+        
+    	return "sendMail";
     }
  
     @PostMapping("/mail/send")
     public String sendMail(Mail mail) {
         emailService.sendSimpleMessage(mail);
         System.out.println("메일 전송 완료!");
+        
         return "redirect:/";
     }
 }
