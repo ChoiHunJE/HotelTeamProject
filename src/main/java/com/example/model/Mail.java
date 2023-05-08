@@ -10,5 +10,5 @@ import lombok.Setter;
 public class Mail {
 		private String address;
 	    private String title;
-	    private String content;
+	    private String content = "예약이 완료되었습니다.";
 }
