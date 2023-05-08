@@ -7,3 +7,6 @@ spring:
     username: Hotel
     password: 1234
     driver-class-name: oracle.jdbc.driver.OracleDriver
+    
+  messages:
+    basename: messages

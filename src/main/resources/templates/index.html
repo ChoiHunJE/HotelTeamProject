@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     
-    <title>ホテルゆるり</title>
+    <title>[[#{app.title}]]</title>
     <link href="/css/test.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script th:inline="javascript">
@@ -86,8 +86,8 @@ ProdList__init();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
 
 <div class="languages">
-<button class="translate" id="eng">EN</button>
-<button class="translate" id="jpn">JP</button>
+<button class="translate" th:onclick="@{?lang=en}">EN</button>
+<button class="translate" th:onclick="@{?lang=ja}">JP</button>
 <div class="my_bg my_div">
         <h2 class="country"></h2>
         <h3 class="time">현재시간: </h3>
@@ -100,7 +100,7 @@ ProdList__init();
   <div class="con flex flex-jc-c">
     <a href="test" class="logo">
       <span><i class="far fa-star"></i></span>
-      <span>ホテル ゆるり</span>
+      <span>[[#{app.title}]]</span>
     </a>
   </div>
 </header>
@@ -110,8 +110,8 @@ ProdList__init();
     <nav class="menu-bar__menu-1">
       <ul class="flex">
        
-        <li class="width-1-7"><a href="reservation" class="block">reservation</a></li>
-        <li class="width-1-7"><a href="#" class="block">my reservations</a></li>
+        <li class="width-1-7"><a href="reservation" class="block">[[#{menu.book}]]</a></li>
+        <li class="width-1-7"><a href="myreservation1" class="block">[[#{menu.myreservations}]]</a></li>
        
       </ul>
     </nav>
@@ -152,7 +152,6 @@ ProdList__init();
     </div>
   </div>
 </section>
-
 
 
 
@@ -197,7 +196,7 @@ ProdList__init();
 <body>
      <div class="box"></div>                 <!--영역테그 -->
     </style>
-    <h1>업체위치</h1>
+    <h1>[[#{map.location}]]</h1>
     </header>
 </head>
 <body>
@@ -208,11 +207,8 @@ ProdList__init();
 
 <div class="container">
 <ul>
-      <li>오시는길</li>
-      <li>주소: Chungjang-daero, Jung-gu, Busan, Republic of Korea</li>
+      <li>[[#{map.address}]]</li>
       <li>TEL :+82 (051)1234-5678</li>
-      <li>CEO: Choi Hunje</li>
-      <li style="font-style: italic;">copyright © 2023 all rights reserved</li>
   </ul>
 </div>
 <p>
@@ -220,8 +216,7 @@ ProdList__init();
   <div class="container">
           <h2> <span><i class="far fa-star"></i></span> Hotel Yururi</h2>
   <ul>
-      <li>〒48939</li>
-      <li>11, Chungjang-daero, Jung-gu, Busan, Republic of Korea</li>
+      <li>11, Chungjang-daero, Jung-gu, Busan, 48939 Republic of Korea</li>
       <li>TEL :+82 (051)1234-5678</li>
       <li>CEO: Choi Hunje</li>
       <li style="font-style: italic;">copyright © 2023 all rights reserved</li>
