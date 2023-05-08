@@ -10,3 +10,7 @@ spring:
     
   messages:
     basename: messages
+    
+mybatis:
+  config-location: classpath:config/mybatis-config.xml
+  mapper-locations: classpath:mapper/**/*.xml
