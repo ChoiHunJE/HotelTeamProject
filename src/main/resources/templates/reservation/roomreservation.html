@@ -3,11 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Room reservation</title>
+<h1>세민킹</h1>
 <style>
 
 </style>
 </head>
 <body>
-
+   <form action="roomreservation" method="post" th:object="${reservationDTO}">
+   <label for="name">room_id</label>
+          <input type="number" th:field="*{room_id}">
+          <button type="submit">客室選択</button>
+   </form>
 </body>
 </html>

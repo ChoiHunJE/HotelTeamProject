@@ -1,5 +1,7 @@
 package com.example.model;
 
+import com.example.model.reservation.Reservation;
+
 import lombok.Getter;
 
 @Getter

@@ -176,37 +176,38 @@ checkinElem.onchange = function () {
     </a>
   </div>
 </header>
-    <form action="reservation" method="post">
+    <form action="reservation" method="post" th:object="${reservationDTO}">
         <div class="elem-group">
           <label for="name">Your Name</label>
-          <input type="text" id="name" name="visitor_name" placeholder="Name" pattern=[A-Z\sa-z]{3,20} required>
+          <input type="text" th:field="*{username}" placeholder="Name" pattern=[A-Z\sa-z]{3,20} required>
         </div>
         <div class="elem-group">
           <label for="email">Your E-mail</label>
-          <input type="email" id="email" name="visitor_email" placeholder="john.doe@email.com" required>
+          <input type="email" th:field="*{email}" placeholder="john.doe@email.com" required>
         </div>
         <div class="elem-group">
           <label for="phone">Your Phone</label>
-          <input type="tel" id="phone" name="visitor_phone" placeholder="010-1111-1111" pattern=(\d{3})-?\s?(\d{3})-?\s?(\d{4}) required>
+          <input type="tel" th:field="*{phone}" placeholder="010-1111-1111" pattern=(\d{3})-?\s?(\d{4})-?\s?(\d{4}) required>
         </div>
         <div class="elem-group inlined">
           <label for="checkin-date">Birth</label>
-          <input type="date" id="checkin-date" name="checkin" required>
+          <input type="date" th:field="*{birth}" required>
         </div>
         <hr>
-        
-        <div class="elem-group inlined">
-          <label for="child">customer</label>
-          <input type="number" id="child" name="total_children" placeholder="2" min="0" required>
-        </div>
-        <div class="elem-group inlined">
-          <label for="checkin-date">Check-in Date</label>
-          <input type="date" id="checkin-date" name="checkin" required>
-        </div>
-        <div class="elem-group inlined">
-          <label for="checkout-date">Check-out Date</label>
-          <input type="date" id="checkout-date" name="checkout" required>
-        </div>
+         <input type="hidden" th:field="*{res_id}">
+           <div class="elem-group inlined">
+             <label for="guests">guests</label>
+             <input type="number" th:field="*{guests}" placeholder="2" min="0" required>
+           </div>
+           <div class="elem-group inlined">
+             <label for="checkin-date">Check-in Date</label>
+             <input type="date" th:field="*{check_in}" required>
+           </div>
+           <div class="elem-group inlined">
+             <label for="checkout-date">Check-out Date</label>
+             <input type="date" th:field="*{check_out}" required>
+           </div>
+   
         <p>
         <button type="submit">客室選択</button>
         

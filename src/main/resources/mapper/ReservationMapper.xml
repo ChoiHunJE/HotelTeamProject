@@ -1,1 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.repository.ReservationMapper">
+
+<!--    <resultMap id="reservationMap" type="model.ReservationDTO">
+   <id property="res_id" column="res_id"/>
+   <result property="username" column="username"/>
+   <result property="phone" column="phone"/>
+   <result property="birth" column="phone"/>
+   <result property="check_in" column="check_in"/>
+   <result property="check_out" column="check_out"/>
+   <result property="guests" column="guests"/>
+   </resultMap> -->
+   
+   <!-- 예약하기(customer) -->
+   <insert id="saveCustomer">
+      insert into customer(
+         email,
+         username,
+         phone,
+         birth
+      ) values (
+         #{email},
+         #{username},
+         #{phone},
+         #{birth}
+      )
+   </insert>
+   <!-- 예약하기(reservation) -->
+   <insert id="saveReservation">
+      <selectKey keyProperty="res_id" resultType="Long" order="BEFORE">
+         select seq_reservation.nextval from dual
+      </selectKey>
+      insert into reservation (
+            res_id,
+            check_in,
+            check_out,
+            email,
+            room_id,
+            guests
+         ) values (
+            #{res_id},
+            #{check_in},
+            #{check_out},
+            #{email},
+            #{room_id},
+            #{guests}
+         )
+   </insert>
+   <!-- <select id="searchDTO" resultMap="reservationMap">
+      select 
+    r.res_id,
+    c.username,
+    c.phone,
+    c.birth,
+    r.guests,
+    c.email,
+    r.check_in,
+    r.check_out
+from 
+    customer c
+join
+    reservation r
+ on c.email = r.email
+order by res_id asc
+   </select> -->
+   
+</mapper>

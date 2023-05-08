@@ -1,1 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.example.model.reservation.Customer" alias="customer"/>
+        <typeAlias type="com.example.model.reservation.Reservation" alias="reservation"/>
+       <typeAlias type="com.example.model.Room" alias="room"/>
+    </typeAliases>
+</configuration>

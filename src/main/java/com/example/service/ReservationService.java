@@ -5,8 +5,9 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.model.Reservation;
 import com.example.model.ReservationEvent;
+import com.example.model.reservation.Reservation;
+import com.example.repository.ReservationMapper;
 
 @Service
 @Transactional
