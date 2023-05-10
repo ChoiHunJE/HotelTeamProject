@@ -12,10 +12,9 @@ import com.example.model.reservation.ReservationDTO;
 
 @Mapper
 public interface ReservationMapper {
-   Reservation saveReservation(Reservation reservation);
+   void saveReservation(Reservation reservation);
    void saveCustomer(Customer customer);
    List<ReservationDTO> searchDTO();
-   void saveRoom(Room room);
    Reservation deleteReservation(Long res_id);
    
 }

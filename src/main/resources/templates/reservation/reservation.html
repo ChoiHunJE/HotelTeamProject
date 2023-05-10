@@ -143,74 +143,120 @@ button:hover {
 }
     </style>
     <script>
-        var currentDateTime = new Date();
-var year = currentDateTime.getFullYear();
-var month = (currentDateTime.getMonth() + 1);
-var date = (currentDateTime.getDate() + 1);
+    
+    function validateForm() {
+        var nameInput = document.getElementById('username');
+        var emailInput = document.getElementById('email');
+        var phoneInput = document.getElementById('phone');
+        var ageInput = document.getElementById('age');
+        var guestsInput = document.getElementById('guests');
+        var checkInInput = document.getElementById('check_in');
+        var checkOutInput = document.getElementById('check_out');
 
-if(date < 10) {
-  date = '0' + date;
-}
-if(month < 10) {
-  month = '0' + month;
-}
+        var name = nameInput.value.trim();
+        var email = emailInput.value.trim();
+        var phone = phoneInput.value.trim();
+        var age = ageInput.value.trim();
+        var guests = guestsInput.value.trim();
+        var checkIn = checkInInput.value;
+        var checkOut = checkOutInput.value;
 
-var dateTomorrow = year + "-" + month + "-" + date;
-var checkinElem = document.querySelector("#checkin-date");
-var checkoutElem = document.querySelector("#checkout-date");
+        var nameRegex = /^[A-Za-z]{3,20}$/;
+        var emailRegex = /^\S+@\S+\.\S+$/;
+        var phoneRegex = /^(\d{3})-?\s?(\d{4})-?\s?(\d{4})$/;
+        var ageRegex = /^\d+$/;
+        var guestsRegex = /^\d+$/;
 
-checkinElem.setAttribute("min", dateTomorrow);
+        if (!nameRegex.test(name)) {
+            alert('이름은 영어로만 작성되어야 하며, 3~20자리여야 합니다.');
+            return false;
+        }
 
-checkinElem.onchange = function () {
-    checkoutElem.setAttribute("min", this.value);
-}
+        if (!emailRegex.test(email)) {
+            alert('유효한 이메일 주소를 입력하세요.');
+            return false;
+        }
+
+        if (!phoneRegex.test(phone)) {
+            alert('유효한 전화번호를 입력하세요.');
+            return false;
+        }
+
+        if (!ageRegex.test(age)) {
+            alert('나이는 숫자로 입력해야 합니다.');
+            return false;
+        }
+
+        if (!guestsRegex.test(guests)) {
+            alert('인원은 숫자로 입력해야 합니다.');
+            return false;
+        }
+
+        // 당일 날짜 가져오기
+        var today = new Date();
+        today.setHours(0, 0, 0, 0); // 시, 분, 초, 밀리초를 0으로 설정
+
+        var checkInDate = new Date(checkIn);
+        var checkOutDate = new Date(checkOut);
+
+        if (checkInDate < today) {
+            alert('체크인은 오늘 이후로 선택해주세요.');
+            return false;
+        }
+
+        if (checkOutDate <= checkInDate) {
+            alert('체크아웃은 체크인 이후로 선택해주세요.');
+            return false;
+        }
+
+        return true;
+    }
     </script>
 </head>
 <body>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 <header class="logo-bar con-min-width padding-0-10">
   <div class="con flex flex-jc-c">
-    <a href="test" class="logo">
+    <a href="/" class="logo">
       <span><i class="far fa-star"></i></span>
       <span>ホテル ゆるり</span>
     </a>
   </div>
 </header>
-    <form action="reservation" method="post" th:object="${reservationDTO}">
+    <form action="reservation" method="post" th:object="${reservationDTO}" onsubmit="validateForm()">
         <div class="elem-group">
           <label for="name">Your Name</label>
-          <input type="text" th:field="*{username}" placeholder="Name" pattern=[A-Z\sa-z]{3,20} required>
+          <input type="text" th:field="*{username}" placeholder="Name">
         </div>
         <div class="elem-group">
           <label for="email">Your E-mail</label>
-          <input type="email" th:field="*{email}" placeholder="john.doe@email.com" required>
+          <input type="email" th:field="*{email}" placeholder="john.doe@email.com" >
         </div>
         <div class="elem-group">
           <label for="phone">Your Phone</label>
-          <input type="tel" th:field="*{phone}" placeholder="010-1111-1111" pattern=(\d{3})-?\s?(\d{4})-?\s?(\d{4}) required>
+          <input type="tel" th:field="*{phone}" placeholder="010-1111-1111" >
         </div>
         <div class="elem-group inlined">
-          <label for="checkin-date">Birth</label>
-          <input type="date" th:field="*{birth}" required>
+          <label for="checkin-date">Age</label>
+          <input type="number" th:field="*{age}" placeholder="20" min="0" max="120" step="1" >
         </div>
         <hr>
          <input type="hidden" th:field="*{res_id}">
            <div class="elem-group inlined">
              <label for="guests">guests</label>
-             <input type="number" th:field="*{guests}" placeholder="2" min="0" required>
+             <input type="number" th:field="*{guests}" placeholder="2" min="1" max="8" >
            </div>
            <div class="elem-group inlined">
              <label for="checkin-date">Check-in Date</label>
-             <input type="date" th:field="*{check_in}" required>
+             <input type="date" th:field="*{check_in}" >
            </div>
            <div class="elem-group inlined">
              <label for="checkout-date">Check-out Date</label>
-             <input type="date" th:field="*{check_out}" required>
+             <input type="date" th:field="*{check_out}" >
            </div>
+           </form>
    
         <p>
         <button type="submit">客室選択</button>
-        
-      </form>
 </body>
 </html>
