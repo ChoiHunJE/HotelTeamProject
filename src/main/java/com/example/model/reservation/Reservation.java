@@ -1,6 +1,8 @@
 package com.example.model.reservation;
 
+
 import lombok.Data;
+
 
 @Data
 public class Reservation {

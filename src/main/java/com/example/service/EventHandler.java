@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 import com.example.exception.BusinessReservationException;
 import com.example.exception.ExceptionCode;
-import com.example.model.Mail;
-import com.example.model.ReservationEvent;
+import com.example.model.mail.Mail;
+import com.example.model.mail.ReservationEvent;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,10 +35,12 @@ public class EventHandler {
 			//	메일 전송 로직 구현
 			Mail mail = new Mail();
 			mail.setAddress(reservationEvent.getReservation().getEmail());
+			mail.setTitle("예약번호 "+ reservationEvent.getReservation().getRes_id() + " 예약이 완료 되었습니다.");
 			emailService.sendMail(mail);
 			
 		} catch (Exception e) {
 			log.error("MailSendException happened: ", e);
+			
 			//	예약 정보 삭제 로직 구현
 			reservationService.deleteReservation(reservationEvent.getReservation().getRes_id());
 			throw new BusinessReservationException(ExceptionCode.FAILED_TO_RESERVATION);

@@ -1,4 +1,5 @@
-package com.example.model;
+package com.example.model.mail;
+
 
 import com.example.model.reservation.Reservation;
 
