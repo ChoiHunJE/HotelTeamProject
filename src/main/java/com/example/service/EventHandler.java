@@ -28,6 +28,8 @@ public class EventHandler {
 	@EventListener
 	@Async	// 비동기
 	public void handleEmailSending(ReservationEvent reservationEvent) {
+		log.info("reservationEvent.getEmail: {}", reservationEvent.getReservation().getEmail());
+		log.info("reservationEvent.getRes_id: {}", reservationEvent.getReservation().getRes_id());
 		//	이메일 전송
 		// 	예외 발생 시 처리할 로직 구현 -> DB에서 예약 삭제
 		try {
@@ -40,7 +42,7 @@ public class EventHandler {
 			
 		} catch (Exception e) {
 			log.error("MailSendException happened: ", e);
-			
+			e.printStackTrace();
 			//	예약 정보 삭제 로직 구현
 			reservationService.deleteReservation(reservationEvent.getReservation().getRes_id());
 			throw new BusinessReservationException(ExceptionCode.FAILED_TO_RESERVATION);

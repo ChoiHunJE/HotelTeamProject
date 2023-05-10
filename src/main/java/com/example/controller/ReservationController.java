@@ -12,6 +12,7 @@ import com.example.model.reservation.Customer;
 import com.example.model.reservation.Reservation;
 import com.example.model.reservation.ReservationDTO;
 import com.example.repository.ReservationMapper;
+import com.example.service.ReservationService;
 
 import lombok.extern.slf4j.Slf4j;
 import oracle.jdbc.proxy.annotation.Post;
@@ -23,10 +24,14 @@ public class ReservationController {
    
    // 데이터베이스 접근을 위한 ReservationMapper 필드 선언
    private ReservationMapper reservationMapper;
-   
+   private ReservationService reservationService;
    @Autowired
    public void setReservationMapper(ReservationMapper reservationMapper) {
       this.reservationMapper = reservationMapper;
+   }
+   @Autowired
+   public void setReservationService(ReservationService reservationService) {
+      this.reservationService = reservationService;
    }
    
    Reservation reservation = new Reservation();
@@ -77,6 +82,7 @@ public class ReservationController {
       log.info("후기 reservation: {}", reservation);
       reservationMapper.saveReservation(reservation);
       reservation = new Reservation();
+      reservationService.createReservation(reservation);
       return "redirect:/";
    }
 }

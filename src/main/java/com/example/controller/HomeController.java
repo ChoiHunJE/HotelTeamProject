@@ -8,33 +8,30 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
 @Controller
 public class HomeController {
 
     @GetMapping("/")
-    public String home(HttpServletRequest request) {
-    	
-    	Locale currentLocale = request.getLocale();
-    	String countryCode = currentLocale.getCountry();
-    	String countryName = currentLocale.getDisplayCountry();
-    	
-    	String langCode = currentLocale.getLanguage();
-    	String langName = currentLocale.getDisplayLanguage();
-    	
-    	System.out.println(countryCode + ": " + countryName);
-    	System.out.println(langCode + ": " + langName);
-    	
-    	System.out.println("=================");
-    	String[] languages = Locale.getISOLanguages();
-    	
-    	for (String language : languages) {
-    		Locale locale = new Locale(language);
-    		System.out.println(language + ": " + locale.getDisplayLanguage());
-    	}
-    	
+    public String home(HttpServletRequest request,
+                   Model model) {
+       
+       model.addAttribute("channel", "ok java");
+       
         return "index";
     }
+    
+    @GetMapping("/locale")
+    public String changeLocale(@RequestParam String language,
+                         Model model) {
+       System.out.println("language selected = " + language);
+       model.addAttribute("channel", "ok java");
+       
+       return "index";
+    }
+    
 }

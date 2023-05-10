@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th=https://www.thymeleaf.org>
 <head>
     <meta charset="UTF-8">
     
@@ -86,8 +86,9 @@ ProdList__init();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
 
 <div class="languages">
-<button class="translate" th:onclick="@{?lang=en}">EN</button>
-<button class="translate" th:onclick="@{?lang=ja}">JP</button>
+<p><a th:href="@{/locale(language=en)}" th:text=#{locale.en}>English</a></p>
+<p><a th:href="@{/locale(language=ja)}" th:text=#{locale.ja}>Japanese</a></p>
+
 <div class="my_bg my_div">
         <h2 class="country"></h2>
         <h3 class="time">현재시간: </h3>
@@ -110,7 +111,7 @@ ProdList__init();
     <nav class="menu-bar__menu-1">
       <ul class="flex">
        
-        <li class="width-1-7"><a href="reservation" class="block">[[#{menu.book}]]</a></li>
+        <li class="width-1-7"><a href="reservation" class="block" th:text=#{menu.book}>book</a></li>
         <li class="width-1-7"><a href="myreservation1" class="block">[[#{menu.myreservations}]]</a></li>
        
       </ul>
@@ -123,12 +124,15 @@ ProdList__init();
 <section class="section-top-slider con-min-width">
   <div class="con">
     <div class="my-slider-1">
+      
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <img src="https://images.unsplash.com/photo-1631049035634-c04c637651b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
             <div class="my-slider-1__prod-name">ROOM 1</div>
           </div>
+          
+          
         </div>
       </div>
       <div class="my-slider-1__pagination flex flex-jc-c"></div>

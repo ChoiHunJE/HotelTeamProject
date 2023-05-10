@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th=https://www.thymeleaf.org>
 <head>
     <meta charset="UTF-8">
     
@@ -417,14 +417,11 @@ ProdList__init();
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
 
-<div class="languages">
-<button class="translate" id="eng">EN</button>
-<button class="translate" id="jpn">JP</button>
-</div>
+
 
 <header class="logo-bar con-min-width padding-0-10">
   <div class="con flex flex-jc-c">
-    <a href="#" class="logo">
+    <a href="/" class="logo">
       <span><i class="far fa-star"></i></span>
       <span>ホテル ゆるり</span>
     </a>
@@ -436,24 +433,22 @@ ProdList__init();
     <nav class="menu-bar__menu-1">
       <ul class="flex">
        
-        <li class="width-1-7"><a href="#" class="block">book</a></li>
-        <li class="width-1-7"><a href="#" class="block">my reservation</a></li>
+        <li class="width-1-7"><a href="reservation" class="block">book</a></li>
+        <li class="width-1-7"><a href="myreservation1" class="block">my reservation</a></li>
        
       </ul>
     </nav>
   </div>
 </header>
 
-<h1>[[#{app.title}]]</h1>
-<div class="searchpic">
-<img src="myreservation1.jpg"/>
-</div>
-<br>
+<h1 th:text=#{myreservations1.title}></h1>
+
 <p class="searchform">
-name: <input type="text" /><br>
-reservation number: <input type="text" /><br>
-<button class="search">search</button>
+[[#{myreservations1.email}]]: <input type="text" /><br>
+[[#{myreservations1.reservationnum}]]: <input type="text" /><br>
+<button type="button" onclick="location.href='myreservation2'">search</button>
 </p>
+
 
 <footer class="footer">
   <div id="serviceNameArea">

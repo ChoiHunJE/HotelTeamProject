@@ -25,12 +25,12 @@ public class ReservationService {
 	
 	public Reservation createReservation(Reservation reservation) {
 		
-		Reservation saveReservation = reservationMapper.save(reservation);
+//		 reservationMapper.saveReservation(reservation);
 		
 		// 이벤트 발생을 어플리케이션에게 알린다.
-		applicationEventPublisher.publishEvent(new ReservationEvent(saveReservation));
+		applicationEventPublisher.publishEvent(new ReservationEvent(reservation));
 		
-		return saveReservation;
+		return reservation;
 	}
 	
 	public void deleteReservation(long res_id) {
