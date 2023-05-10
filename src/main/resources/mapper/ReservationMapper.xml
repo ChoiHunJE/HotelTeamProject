@@ -20,12 +20,12 @@
          email,
          username,
          phone,
-         birth
+         age
       ) values (
          #{email},
          #{username},
          #{phone},
-         #{birth}
+         #{age}
       )
    </insert>
    <!-- 예약하기(reservation) -->

@@ -190,8 +190,8 @@ checkinElem.onchange = function () {
           <input type="tel" th:field="*{phone}" placeholder="010-1111-1111" pattern=(\d{3})-?\s?(\d{4})-?\s?(\d{4}) required>
         </div>
         <div class="elem-group inlined">
-          <label for="checkin-date">Age</label>
-          <input type="Long" th:field="*{age}" required>
+          <label for="checkin-date">Birth</label>
+          <input type="date" th:field="*{birth}" required>
         </div>
         <hr>
          <input type="hidden" th:field="*{res_id}">

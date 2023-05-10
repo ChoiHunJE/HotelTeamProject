@@ -49,7 +49,7 @@ public class ReservationController {
       customer.setUsername(reservationDTO.getUsername());
       customer.setEmail(reservationDTO.getEmail());
       customer.setPhone(reservationDTO.getPhone());
-      customer.setBirth(reservationDTO.getBirth());
+      customer.setAge(reservationDTO.getAge());
       reservationMapper.saveCustomer(customer);
       
       reservation.setCheck_in(reservationDTO.getCheck_in());
