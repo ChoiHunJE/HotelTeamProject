@@ -1,33 +1,31 @@
 package com.example.service;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.example.model.mail.Mail;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 @Service
+@Slf4j
 public class EmailService {
 	
-	 private final JavaMailSender emailSender;
+	 private final JavaMailSender mailSender;
 	 
-	 @Value("${GMAIL_ADDRESS}")
-	 private static String FROM_ADDRESS;
-	 
-	 public EmailService(JavaMailSender emailSender) {
-		 this.emailSender = emailSender;
+	 public EmailService(JavaMailSender mailSender) {
+		 this.mailSender = mailSender;
 	 }
 	 
-	    public void sendMail(Mail mail) {
-	        SimpleMailMessage message = new SimpleMailMessage();
-	        
-	        message.setFrom(FROM_ADDRESS);	// 이메일 주소
-	        message.setTo(mail.getAddress());
-	        message.setSubject("예약이 확정 되었습니다.");
-	        message.setText(mail.getContent());
-	        
-	        emailSender.send(message);
-	    }
+	 public void sendSimpleMessage(Mail mail) {
+		 SimpleMailMessage message = new SimpleMailMessage();
+		 message.setTo(mail.getAddress());
+		 log.info("address: {}", mail.getAddress());
+		 message.setSubject("Yururi Hotel Reservation Success!!");
+		 message.setText("예약이 완료되었습니다.");
+		 mailSender.send(message);
+	 }
+	 
 }

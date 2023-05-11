@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.model.mail.Mail;
 import com.example.model.reservation.Customer;
 import com.example.model.reservation.Reservation;
 import com.example.model.reservation.ReservationDTO;
 import com.example.repository.ReservationMapper;
-import com.example.service.ReservationService;
+import com.example.service.EmailService;
 
 import lombok.extern.slf4j.Slf4j;
-import oracle.jdbc.proxy.annotation.Post;
 
 @Slf4j
 @Controller
@@ -24,16 +24,17 @@ public class ReservationController {
    
    // 데이터베이스 접근을 위한 ReservationMapper 필드 선언
    private ReservationMapper reservationMapper;
-   private ReservationService reservationService;
+   private final EmailService emailService;
+  
    @Autowired
    public void setReservationMapper(ReservationMapper reservationMapper) {
       this.reservationMapper = reservationMapper;
    }
-   @Autowired
-   public void setReservationService(ReservationService reservationService) {
-      this.reservationService = reservationService;
-   }
    
+   public ReservationController(EmailService emailService) {
+		this.emailService = emailService;
+	}
+  
    Reservation reservation = new Reservation();
    
    
@@ -61,6 +62,7 @@ public class ReservationController {
       reservation.setCheck_out(reservationDTO.getCheck_out());
       reservation.setGuests(reservationDTO.getGuests());
       reservation.setEmail(reservationDTO.getEmail());
+      
       log.info("reservation: {}", reservation);
       
       return "redirect:/roomreservation";
@@ -76,13 +78,16 @@ public class ReservationController {
    }
    
    @PostMapping("roomreservation")
-   public String roomreservation2(@Validated @ModelAttribute("reservationDTO") ReservationDTO reservationDTO) {
+   public String roomreservation2(@Validated @ModelAttribute("reservationDTO") ReservationDTO reservationDTO,
+		   							Mail mail) {
       log.info("초기 reservation: {}", reservation);
       reservation.setRoom_id(reservationDTO.getRoom_id());
       log.info("후기 reservation: {}", reservation);
       reservationMapper.saveReservation(reservation);
-      reservation = new Reservation();
-      reservationService.createReservation(reservation);
+      mail.setAddress(reservation.getEmail());
+      emailService.sendSimpleMessage(mail);
+//      reservation = new Reservation();
+     
       return "redirect:/";
    }
 }
