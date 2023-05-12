@@ -34,7 +34,7 @@ public class ReservationController {
    public ReservationController(EmailService emailService) {
 		this.emailService = emailService;
 	}
-  
+   Customer customer = new Customer();
    Reservation reservation = new Reservation();
    
    
@@ -51,7 +51,6 @@ public class ReservationController {
    @PostMapping("reservation")
    public String reservation(@Validated @ModelAttribute("reservationDTO") ReservationDTO reservationDTO) {
       log.info("reservationDTO: {}", reservationDTO);
-      Customer customer = new Customer();
       customer.setUsername(reservationDTO.getUsername());
       customer.setEmail(reservationDTO.getEmail());
       customer.setPhone(reservationDTO.getPhone());
@@ -85,6 +84,10 @@ public class ReservationController {
       log.info("후기 reservation: {}", reservation);
       reservationMapper.saveReservation(reservation);
       mail.setAddress(reservation.getEmail());
+      mail.setTitle(customer.getUsername()+ " 님 예약이 완료되었습니다.");
+      mail.setContent("예약번호: " + reservation.getRes_id() + "\n" 
+      + "체크인 시간: " + reservation.getCheck_in() + "\n" 
+      + "체크아웃 시간: " + reservation.getCheck_out());
       emailService.sendSimpleMessage(mail);
 //      reservation = new Reservation();
      

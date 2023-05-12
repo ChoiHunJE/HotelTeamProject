@@ -23,8 +23,8 @@ public class EmailService {
 		 SimpleMailMessage message = new SimpleMailMessage();
 		 message.setTo(mail.getAddress());
 		 log.info("address: {}", mail.getAddress());
-		 message.setSubject("Yururi Hotel Reservation Success!!");
-		 message.setText("예약이 완료되었습니다.");
+		 message.setSubject(mail.getTitle());
+		 message.setText(mail.getContent());
 		 mailSender.send(message);
 	 }
 	 
