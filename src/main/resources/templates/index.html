@@ -91,7 +91,7 @@ ProdList__init();
 
 <div class="my_bg my_div">
         <h2 class="country"></h2>
-        <h3 class="time">현재시간: </h3>
+        <h3 class="time">Local Time: </h3>
         <h3 class="icon"></h3>
         <h3 class="ctemp"></h3>
     </div>
@@ -111,8 +111,14 @@ ProdList__init();
     <nav class="menu-bar__menu-1">
       <ul class="flex">
        
-        <li class="width-1-7"><a href="reservation" class="block" th:text=#{menu.book}>book</a></li>
-        <li class="width-1-7"><a href="myreservation1" class="block">[[#{menu.myreservations}]]</a></li>
+        <li class="width-1-7"><a href="reservation" class="block" th:text=#{menu.reservation}>RESERVATION</a></li>
+        <li class="width-1-7"><a href="myreservation1" class="block" th:text=#{menu.myreservations}>MY RESERVATIONS</a></li>
+        <li class="width-1-7"><a href="calender" class="block" th:text=#{menu.roomsavailable}>ROOMS AVAILABLE</a></li>
+        <li class="width-1-7"><a href="#" class="block" th:text=#{menu.rooms}>ROOMS</a></li>
+        <li class="width-1-7"><a href="#" class="block" th:text=#{menu.facilities}>FACILITIES</a></li>
+        <li class="width-1-7"><a href="#" class="block" th:text=#{menu.qna}>Q&A</a></li>
+        <li class="width-1-7"><a href="#" class="block" th:text=#{menu.aboutus}>ABOUT US</a></li>
+        
        
       </ul>
     </nav>
@@ -145,7 +151,7 @@ ProdList__init();
 <div class="container">
 <header>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>google map</title>
@@ -183,7 +189,7 @@ ProdList__init();
 <body>
      <div class="box"></div>                 <!--영역테그 -->
     </style>
-    <h1>[[#{map.location}]]</h1>
+    <h2>[[#{map.location}]]</h2>
     </header>
 </head>
 <body>
@@ -204,7 +210,7 @@ ProdList__init();
           <h2> <span><i class="far fa-star"></i></span> Hotel Yururi</h2>
   <ul>
       <li>11, Chungjang-daero, Jung-gu, Busan, 48939 Republic of Korea</li>
-      <li>TEL :+82 (051)1234-5678</li>
+      <li>TEL: +82 (051)1234-5678</li>
       <li>CEO: Choi Hunje</li>
       <li style="font-style: italic;">copyright © 2023 all rights reserved</li>
   </ul>
