@@ -86,8 +86,8 @@ public class ReservationController {
       mail.setAddress(reservation.getEmail());
       mail.setTitle(customer.getUsername()+ " 님 예약이 완료되었습니다.");
       mail.setContent("예약번호: " + reservation.getRes_id() + "\n" 
-      + "체크인 시간: " + reservation.getCheck_in() + "\n" 
-      + "체크아웃 시간: " + reservation.getCheck_out());
+      + "체크인: " + reservation.getCheck_in() + "\n" 
+      + "체크아웃: " + reservation.getCheck_out());
       emailService.sendSimpleMessage(mail);
 //      reservation = new Reservation();
      
