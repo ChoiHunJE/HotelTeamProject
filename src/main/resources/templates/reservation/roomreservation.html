@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <style>
     /* 노말라이즈 시작 */
     body, ul, li {
@@ -153,6 +154,7 @@
       color: #bbb;
       text-decoration: none;
       cursor: pointer;
+      
     }
 
     #room {
@@ -216,8 +218,43 @@
     function closeModal() {
       document.getElementById('modal').style.display = 'none';
     }
+    
+    function validateForm() {
+    	 var checkInInput = document.getElementById('check_in');
+         var checkOutInput = document.getElementById('check_out');
+         
+         var checkIn = checkInInput.value;
+         var checkOut = checkOutInput.value;
+         
+      // 당일 날짜 가져오기
+         var today = new Date();
+         today.setHours(0, 0, 0, 0); // 시, 분, 초, 밀리초를 0으로 설정
+
+         var checkInDate = new Date(checkIn);
+         var checkOutDate = new Date(checkOut);
+
+         if (checkInDate < today) {
+             alert('체크인은 오늘 이후로 선택해주세요.');
+             return false;
+         }
+
+         if (checkOutDate <= checkInDate) {
+             alert('체크아웃은 체크인 이후로 선택해주세요.');
+             return false;
+         }
+    }
   </script>
-  <form action="roomreservation" method="post" th:object="${reservationDTO}">
+  
+  
+  <form action="roomreservation" method="post" th:object="${reservationDTO}" onsubmit="return validateForm()">
+    		<div class="elem-group inlined">
+             <label for="checkin-date">Check-in Date</label>
+             <input type="date" th:field="*{check_in}" >
+           </div>
+           <div class="elem-group inlined">
+             <label for="checkout-date">Check-out Date</label>
+             <input type="date" th:field="*{check_out}" >
+           </div>
   <h1>객실선택</h1>
   <select name="room" id="room" th:field="*{room_id}">
     <option value="1">1</option>

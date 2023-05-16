@@ -150,16 +150,14 @@ button:hover {
         var phoneInput = document.getElementById('phone');
         var ageInput = document.getElementById('age');
         var guestsInput = document.getElementById('guests');
-        var checkInInput = document.getElementById('check_in');
-        var checkOutInput = document.getElementById('check_out');
+       
 
         var name = nameInput.value.trim();
         var email = emailInput.value.trim();
         var phone = phoneInput.value.trim();
         var age = ageInput.value.trim();
         var guests = guestsInput.value.trim();
-        var checkIn = checkInInput.value;
-        var checkOut = checkOutInput.value;
+       
 
         var nameRegex = /^[A-Za-z]{3,20}$/;
         var emailRegex = /^\S+@\S+\.\S+$/;
@@ -189,23 +187,6 @@ button:hover {
 
         if (!guestsRegex.test(guests)) {
             alert('인원은 1에서 8 사이의 숫자로 입력해야 합니다.'); 
-            return false;
-        }
-
-        // 당일 날짜 가져오기
-        var today = new Date();
-        today.setHours(0, 0, 0, 0); // 시, 분, 초, 밀리초를 0으로 설정
-
-        var checkInDate = new Date(checkIn);
-        var checkOutDate = new Date(checkOut);
-
-        if (checkInDate < today) {
-            alert('체크인은 오늘 이후로 선택해주세요.');
-            return false;
-        }
-
-        if (checkOutDate <= checkInDate) {
-            alert('체크아웃은 체크인 이후로 선택해주세요.');
             return false;
         }
 
@@ -248,16 +229,6 @@ button:hover {
              <label for="guests">guests</label>
              <input type="number" th:field="*{guests}" placeholder="1">
            </div>
-           <div class="elem-group inlined">
-             <label for="checkin-date">Check-in Date</label>
-             <input type="date" th:field="*{check_in}" >
-           </div>
-           <div class="elem-group inlined">
-             <label for="checkout-date">Check-out Date</label>
-             <input type="date" th:field="*{check_out}" >
-           </div>
-           
-   
         <p>
         <button type="submit">객실선택</button>
 </form>

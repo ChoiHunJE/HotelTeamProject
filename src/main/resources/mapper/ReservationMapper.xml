@@ -49,6 +49,10 @@
             #{guests}
          )
    </insert>
+   
+   <select id="findReservation" resultType="reservation">
+   		select * from reservation
+   </select>
    <!-- <select id="searchDTO" resultMap="reservationMap">
       select 
     r.res_id,

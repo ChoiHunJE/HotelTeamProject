@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +46,7 @@ public class ReservationController {
       log.info("reservation 실행!!");
       ReservationDTO reservationDTO = new ReservationDTO();
       model.addAttribute("reservationDTO", reservationDTO);
+      
       return "reservation/reservation";
    }
    
@@ -57,8 +60,6 @@ public class ReservationController {
       customer.setAge(reservationDTO.getAge());
       reservationMapper.saveCustomer(customer);
       
-      reservation.setCheck_in(reservationDTO.getCheck_in());
-      reservation.setCheck_out(reservationDTO.getCheck_out());
       reservation.setGuests(reservationDTO.getGuests());
       reservation.setEmail(reservationDTO.getEmail());
       
@@ -72,25 +73,33 @@ public class ReservationController {
       log.info("roomreservation 실행!!");
       ReservationDTO reservationDTO =  new ReservationDTO();
       model.addAttribute("reservationDTO", reservationDTO);
-      log.info("나머지 값들 : {}", reservation);
+      List<Reservation> reservations = reservationMapper.findReservation();
+      model.addAttribute("reservations", reservations);
+      log.info("reservations: {}", reservations);
+      
+      
       return "reservation/roomreservation";
    }
    
    @PostMapping("roomreservation")
-   public String roomreservation2(@Validated @ModelAttribute("reservationDTO") ReservationDTO reservationDTO,
-		   							Mail mail) {
+   public String roomreservation2(@ModelAttribute("reservationDTO") ReservationDTO reservationDTO
+		   						  ,Mail mail) {
+	   
+	   reservation.setCheck_in(reservationDTO.getCheck_in());
+	   reservation.setCheck_out(reservationDTO.getCheck_out());
       log.info("초기 reservation: {}", reservation);
       reservation.setRoom_id(reservationDTO.getRoom_id());
       log.info("후기 reservation: {}", reservation);
       reservationMapper.saveReservation(reservation);
+      
       mail.setAddress(reservation.getEmail());
       mail.setTitle(customer.getUsername()+ " 님 예약이 완료되었습니다.");
       mail.setContent("예약번호: " + reservation.getRes_id() + "\n" 
       + "체크인: " + reservation.getCheck_in() + "\n" 
       + "체크아웃: " + reservation.getCheck_out());
+      
       emailService.sendSimpleMessage(mail);
-//      reservation = new Reservation();
-     
+
       return "redirect:/";
    }
 }

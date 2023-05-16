@@ -1,8 +1,10 @@
 package com.example.model.reservation;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class ReservationDTO {
    private String email;
    private String username;
