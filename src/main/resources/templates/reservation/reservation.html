@@ -180,13 +180,13 @@ button:hover {
             return false;
         }
 
-        if (!ageRegex.test(age) || age < 1 || age > 120) { 
-            alert('나이는 1에서 120 사이의 값을 입력해주세요.');
+        if (!ageRegex.test(age) || age < 20 || age > 120) { 
+            alert('유효한 나이값을 입력하세요.(20~120)');
             return false;
         }
 
         if (!guestsRegex.test(guests)) {
-            alert('인원은 1에서 8 사이의 숫자로 입력해야 합니다.'); 
+            alert('최대 8명까지 입니다.'); 
             return false;
         }
 
