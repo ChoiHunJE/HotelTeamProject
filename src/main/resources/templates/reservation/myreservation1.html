@@ -351,6 +351,7 @@ h1{
 
 .searchpic {
   text-align: center;
+
 }
 
 
@@ -433,20 +434,26 @@ ProdList__init();
     <nav class="menu-bar__menu-1">
       <ul class="flex">
        
-        <li class="width-1-7"><a href="reservation" class="block">book</a></li>
-        <li class="width-1-7"><a href="myreservation1" class="block">my reservation</a></li>
+       <li class="width-1-7"><a href="reservation" class="block" th:text=#{menu.reservation}>RESERVATION</a></li>
+        <li class="width-1-7"><a href="myreservation1" class="block" th:text=#{menu.myreservations}>MY RESERVATIONS</a></li>
+        <li class="width-1-7"><a href="calender" class="block" th:text=#{menu.roomsavailable}>ROOMS AVAILABLE</a></li>
+        <li class="width-1-7"><a href="#" class="block" th:text=#{menu.rooms}>ROOMS</a></li>
+        <li class="width-1-7"><a href="#" class="block" th:text=#{menu.facilities}>FACILITIES</a></li>
+        <li class="width-1-7"><a href="#" class="block" th:text=#{menu.qna}>Q&A</a></li>
+        <li class="width-1-7"><a href="#" class="block" th:text=#{menu.aboutus}>ABOUT US</a></li>
        
       </ul>
     </nav>
   </div>
 </header>
 
-<h1 th:text=#{myreservations1.title}></h1>
+<h1 th:text=#{myreservations.title}>MY RESERVATIONS</h1>
 
 <p class="searchform">
-[[#{myreservations1.email}]]: <input type="text" /><br>
-[[#{myreservations1.reservationnum}]]: <input type="text" /><br>
-<button type="button" onclick="location.href='myreservation2'">search</button>
+<img src="https://images.unsplash.com/photo-1549638441-b787d2e11f14?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"/><br>
+[[#{myreservations.email}]]: <input type="text" /><br>
+[[#{myreservations.reservationnum}]]: <input type="text" /><br>
+<button type="button" onclick="location.href='myreservation2'" th:text=#{myreservations.button}>search</button>
 </p>
 
 

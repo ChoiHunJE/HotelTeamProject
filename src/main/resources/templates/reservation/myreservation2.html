@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     
@@ -349,6 +349,13 @@ p {
 
 }
 
+.searchform {
+   text-align: center;
+   margin-top: 50px;
+   margin-bottom: 100px;
+}
+
+
 /* 커스텀 끝 */
     </style>
     
@@ -425,27 +432,28 @@ ProdList__init();
     <nav class="menu-bar__menu-1">
       <ul class="flex">
        
-        <li class="width-1-7"><a href="index" class="block">book</a></li>
-        <li class="width-1-7"><a href="myreservation1" class="block">my reservation</a></li>
-       	
+        <li class="width-1-7"><a href="reservation" class="block" th:text=#{menu.reservation}>RESERVATION</a></li>
+        <li class="width-1-7"><a href="myreservation1" class="block" th:text=#{menu.myreservations}>MY RESERVATIONS</a></li>
+        <li class="width-1-7"><a href="calender" class="block" th:text=#{menu.roomsavailable}>ROOMS AVAILABLE</a></li>
+        <li class="width-1-7"><a href="#" class="block" th:text=#{menu.rooms}>ROOMS</a></li>
+        <li class="width-1-7"><a href="#" class="block" th:text=#{menu.facilities}>FACILITIES</a></li>
+        <li class="width-1-7"><a href="#" class="block" th:text=#{menu.qna}>Q&A</a></li>
+        <li class="width-1-7"><a href="#" class="block" th:text=#{menu.aboutus}>ABOUT US</a></li>
+          
       </ul>
     </nav>
   </div>
 </header>
 
-<h1>my reservation</h1>
+<h1 th:text=#{myreservations.title}>MY RESERVATIONS</h1>
 
-<p>
-  room:<br>
-  check-in:<br>
-  check-out:<br>
-  price:
+<div class="searchform">
 
-
-
-</p>
-
-
+<h3>room : Room 1</h3>
+<h3>check-in : 2023-05-27</h3>
+<h3>check-out : 2023-05-29</h3>
+<h3>guests : 2</h3>
+</div>
 
 <footer class="footer">
   <div id="serviceNameArea">
