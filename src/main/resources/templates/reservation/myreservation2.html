@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     
@@ -349,13 +349,6 @@ p {
 
 }
 
-.searchform {
-   text-align: center;
-   margin-top: 50px;
-   margin-bottom: 100px;
-}
-
-
 /* 커스텀 끝 */
     </style>
     
@@ -422,7 +415,7 @@ ProdList__init();
   <div class="con flex flex-jc-c">
     <a href="/" class="logo">
       <span><i class="far fa-star"></i></span>
-      <span>ホテル ゆるり</span>
+      <span>[[#{app.title}]]</span>
     </a>
   </div>
 </header>
@@ -439,21 +432,25 @@ ProdList__init();
         <li class="width-1-7"><a href="#" class="block" th:text=#{menu.facilities}>FACILITIES</a></li>
         <li class="width-1-7"><a href="#" class="block" th:text=#{menu.qna}>Q&A</a></li>
         <li class="width-1-7"><a href="#" class="block" th:text=#{menu.aboutus}>ABOUT US</a></li>
-          
+        
       </ul>
     </nav>
   </div>
 </header>
 
-<h1 th:text=#{myreservations.title}>MY RESERVATIONS</h1>
+<h1 th:text=#{myreservations.title}></h1>
 
-<div class="searchform">
+<p>
+  ルーム: 1<br>
+  チェックイン: 2023-05-27<br>
+  チェックアウト: 2023-05-29<br>
+  人数: 2
 
-<h3>room : Room 1</h3>
-<h3>check-in : 2023-05-27</h3>
-<h3>check-out : 2023-05-29</h3>
-<h3>guests : 2</h3>
-</div>
+
+
+</p>
+
+
 
 <footer class="footer">
   <div id="serviceNameArea">
